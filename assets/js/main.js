@@ -1,5 +1,5 @@
 $(document)
-.on("submit", "form.js-register", function(event) {
+.on("submit", "form.js-register, form.js-login", function(event) {
 	event.preventDefault();
 
 	var _form = $(this);
@@ -52,9 +52,7 @@ $(document)
 
 	return false;
 })
-
-
-$(document)
+//
 .on("submit", "form.js-login", function(event) {
 	event.preventDefault();
 
@@ -94,7 +92,7 @@ $(document)
 			window.location = data.redirect;
 		} else if(data.error !== undefined) {
 			_error
-				.text(data.error)
+				.html(data.error)
 				.show();
 		}
 	})
