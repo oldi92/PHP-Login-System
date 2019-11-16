@@ -2,8 +2,8 @@
 define("__CONFIG__",true);
 require_once "inc/config.php";
 
-echo $_SESSION['user_id']. " is your user id ";
-exit;
+
+ ForceLolgin();
 
  ?>
 
@@ -25,23 +25,7 @@ exit;
   <body>
 
   	<div class="uk-section uk-container">
-  		<?php
-      echo "Hello World The Date is: ";
-      echo date('d m Y');
-
-
-       ?>
-
-       <p>
-
-
-         <a href="php_login_course/login.php">Login</a>
-         <a href="php_login_course/register.php">Register</a>
-
-
-
-
-       </p>
+  	Dashboard here  you are sign in as user : <?php echo $_SESSION['user_id']; ?>
   	</div>
 
 
