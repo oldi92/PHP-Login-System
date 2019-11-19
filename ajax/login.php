@@ -13,34 +13,33 @@
 		$return = [];
 
 		$email = Filter::String( $_POST['email'] );
+		$password = $_POST['password'];
 
 		// Make sure the user does not exist.
-		$findUser = $con->prepare("SELECT user_id FROM users WHERE email = LOWER(:email) LIMIT 1");
+		$findUser = $con->prepare("SELECT user_id, password FROM users WHERE email = LOWER(:email) LIMIT 1");
 		$findUser->bindParam(':email', $email, PDO::PARAM_STR);
 		$findUser->execute();
 
 		if($findUser->rowCount() == 1) {
 			// User exists
 			// We can also check to see if they are able to log in.
+			$User = findUser->fetch(PDO::FETCH_ASSOC);
+			$user_id = (int) $User['user_id'];
+			$hash = (string) $User['password'];
+
+			if (password_verify($password, $hash)) {
+				 //currect password
+				 $return['redirect'] = '/php_login_course/dashboard.php';
+				 $_SESSION['user_id'] = $user_id;
+			}else{
+				 //invalid password
+				 $return ['error'] = "Invalid user email/passowrd";
+			}
 			$return['error'] = "You already have an account";
-			$return['is_logged_in'] = false;
+
 		} else {
 			// User does not exist, add them now.
-
-			$password = password_hash($_POST['password'], PASSWORD_DEFAULT);
-
-			$addUser = $con->prepare("INSERT INTO users(email, password) VALUES(LOWER(:email), :password)");
-			$addUser->bindParam(':email', $email, PDO::PARAM_STR);
-			$addUser->bindParam(':password', $password, PDO::PARAM_STR);
-			$addUser->execute();
-
-			$user_id = $con->lastInsertId();
-
-			$_SESSION['user_id'] = (int) $user_id;
-
-			$return['redirect'] = 'php_login_course/dashboard.php?message=welcome';
-			$return['is_logged_in'] = true;
-		}
+			$return['error'] = "You do not have a ccount. <a href='php_login_course/register.php'>Create now!</a>";
 
 		echo json_encode($return, JSON_PRETTY_PRINT); exit;
 	} else {

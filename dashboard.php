@@ -5,7 +5,10 @@
 	// Require the config
 	require_once "inc/config.php";
 
+   ForceLogin();
+
 ?>
+
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -23,14 +26,7 @@
   <body>
 
   	<div class="uk-section uk-container">
-  		<?php
-  			echo "Hello world. Today is: ";
-  			echo date("Y m d");
-  		?>
-  		<p>
-  			<a href="php_login_course/login.php">Login</a>
-  			<a href="php_login_course/register.php">Register</a>
-  		</p>
+     dashboard here: you are signed here in as user :<?php echo $_SESSION['user_id']; ?>
   	</div>
 
   	<?php require_once "inc/footer.php"; ?>
