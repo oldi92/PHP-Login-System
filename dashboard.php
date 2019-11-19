@@ -1,11 +1,12 @@
-<?php
+<?php 
 
 	// Allow the config
 	define('__CONFIG__', true);
 	// Require the config
-	require_once "inc/config.php";
+	require_once "inc/config.php"; 
 
-   ForceLogin();
+	echo $_SESSION['user_id'] . ' is your user id';
+	exit;
 
 ?>
 
@@ -26,9 +27,9 @@
   <body>
 
   	<div class="uk-section uk-container">
-     dashboard here: you are signed here in as user :<?php echo $_SESSION['user_id']; ?>
+  		
   	</div>
 
-  	<?php require_once "inc/footer.php"; ?>
+  	<?php require_once "inc/footer.php"; ?> 
   </body>
 </html>

@@ -1,5 +1,5 @@
 $(document)
-.on("submit", "form.js-register", function(event) {
+.on("submit", "form.js-register, form.js-login", function(event) {
 	event.preventDefault();
 
 	var _form = $(this);
@@ -27,13 +27,13 @@ $(document)
 
 	$.ajax({
 		type: 'POST',
-		url: 'php_login_course/ajax/register.php',
+		url: '/ajax/register.php',
 		data: dataObj,
 		dataType: 'json',
 		async: true,
 	})
 	.done(function ajaxDone(data) {
-		// Whatever data is
+		// Whatever data is 
 		if(data.redirect !== undefined) {
 			window.location = data.redirect;
 		} else if(data.error !== undefined) {
@@ -43,7 +43,7 @@ $(document)
 		}
 	})
 	.fail(function ajaxFailed(e) {
-		// This failed
+		// This failed 
 	})
 	.always(function ajaxAlwaysDoThis(data) {
 		// Always do
@@ -52,17 +52,7 @@ $(document)
 
 	return false;
 })
-
-
-
-
-
-
-
-
-
-
-
+// 
 .on("submit", "form.js-login", function(event) {
 	event.preventDefault();
 
@@ -91,13 +81,13 @@ $(document)
 
 	$.ajax({
 		type: 'POST',
-		url: 'php_login_course/ajax/login.php',
+		url: '/ajax/login.php',
 		data: dataObj,
 		dataType: 'json',
 		async: true,
 	})
 	.done(function ajaxDone(data) {
-		// Whatever data is
+		// Whatever data is 
 		if(data.redirect !== undefined) {
 			window.location = data.redirect;
 		} else if(data.error !== undefined) {
@@ -107,7 +97,7 @@ $(document)
 		}
 	})
 	.fail(function ajaxFailed(e) {
-		// This failed
+		// This failed 
 	})
 	.always(function ajaxAlwaysDoThis(data) {
 		// Always do
